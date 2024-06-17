@@ -1,0 +1,51 @@
+//define the syntax for the protocol buffer
+syntax="proto3"; 
+// Declares the package in use
+package proto; 
+
+//defines the import path of the package that will contain all the generated code for the file
+option go_package="github.com/gRPC_CRUD_APP_Example"; 
+message Movie {
+   string id =1;
+   string title =2;
+   string genre =3;
+}
+message CreateMovieRequest {
+   Movie movie = 1;
+}
+message CreateMovieResponse {
+   Movie movie = 1;
+}
+message ReadMovieRequest{
+   string id =1;
+}
+message ReadMovieResponse{
+   Movie movie =1;
+}
+message ReadMoviesRequest{
+ 
+}
+//defining response that will return an array of values
+message ReadMoviesResponse{
+   repeated Movie movies =1;
+}
+message UpdateMovieRequest{
+   Movie movie =1;
+}
+message UpdateMovieResponse{
+   Movie movie =1;
+}
+message DeleteMovieRequest{
+   string id =1;
+}
+message DeleteMovieResponse{
+   bool success =1;
+}
+// service object. Refines the methods that will implemented by the server
+service MovieService {
+   rpc CreateMovie(CreateMovieRequest) returns (CreateMovieResponse) {}
+   rpc GetMovie(ReadMovieRequest) returns (ReadMovieResponse) {}
+   rpc GetMovies(ReadMoviesRequest) returns (ReadMoviesResponse) {}
+   rpc UpdateMovie(UpdateMovieRequest) returns (UpdateMovieResponse) {}
+   rpc DeleteMovie(DeleteMovieRequest) returns (DeleteMovieResponse) {}
+}
